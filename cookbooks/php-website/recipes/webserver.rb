@@ -1,10 +1,5 @@
 #
 # Cookbook Name:: php-website
-:qa
-
-
-
-
 
 # Recipe:: webserver
 #
@@ -22,7 +17,7 @@ include_recipe "apache2::mod_php5"
 
 # Set up the Apache virtual host 
 web_app app_name do 
-  docroot "/var/www/#{app_name}/htdocs"
+  docroot "/var/www/#{app_name}/public"
   log_dir "/var/www/#{app_name}/logs"
   template "apache-site.conf.erb" 
 end
