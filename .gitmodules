@@ -19,3 +19,6 @@
 [submodule "cookbooks/nginx"]
 	path = cookbooks/nginx
 	url = https://github.com/opscode-cookbooks/nginx
+[submodule "cookbooks/unicorn"]
+	path = cookbooks/unicorn
+	url = https://github.com/opscode-cookbooks/unicorn
