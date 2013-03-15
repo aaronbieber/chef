@@ -9,6 +9,8 @@
 
 include_recipe "ruby-website::setup"
 
+# Prerequisite for nginx's ohai_plugin.
+include_recipe "ohai"
 include_recipe "nginx"
 include_recipe "unicorn"
 
@@ -40,7 +42,7 @@ template "/etc/unicorn.cfg" do
   group "root"
   mode "644"
   source "unicorn.erb"
-  variables(:app_dir => app_dir)
+  variables(:app_dir => app_dir, :app_name => node['ruby_website']['app_name'])
 end
 
 rbenv_script "run-rails" do
@@ -58,7 +60,7 @@ template "/etc/nginx/sites-enabled/default" do
   group "root"
   mode "644"
   source "nginx.erb"
-  variables( :static_root => "#{app_dir}/public")
+  variables(:static_root => "#{app_dir}/public", :app_name => node['ruby_website']['app_name'])
   notifies :restart, "service[nginx]"
 end
 
